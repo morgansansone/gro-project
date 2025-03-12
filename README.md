@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# Gro Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web-based application for managing personal budgets, tracking expenses, and visualizing financial data.
 
-## Available Scripts
+## Table of Contents
+- [About](#about)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technical Details](#technical-details)
+- [Contributing](#contributing)
+- [License](#license)
 
+## About
+The Gro Project is a modern, web-based application designed to help users manage their budgets, track expenses, and visualize financial data. It is built with a focus on usability, accessibility, and scalability.
+
+## Features
+- **Budget Dashboard**: View income, expenses, savings goals, and visualizations (e.g., pie charts, bar graphs).
+- **Transaction History**: Filter and view past transactions.
+- **User Account Settings**: Update profile information and budget preferences (e.g., currency, default categories).
+- **AI-Powered Recommendations**: Get budget recommendations and expense categorization based on transaction patterns.
+- **Export Functionality**: Export budgets and transactions to CSV or PDF.
+- **Recurring Entries**: Set recurring expenses or income entries.
+
+## Requirements
+### Functional Requirements
+- The application must not use any CMS (e.g., WordPress, Joomla).
+- It must be a web-based application accessible via modern browsers.
+- The database must be SQL Server 2012 or later.
+- A CSS framework (e.g., Bootstrap, Tailwind CSS) must be used for front-end design consistency.
+- Unit testing is mandatory for critical components (e.g., user authentication, budgeting calculations).
+
+### Nonfunctional Requirements
+- **Financial Accuracy**: Ensure accurate calculations for budgets, expenses, and savings goals.
+- **User Experience**: Intuitive navigation, responsive design, and modern UI/UX principles.
+- **Accessibility**: Comply with WCAG 2.1 standards and provide keyboard navigation support.
+- **Performance**: Optimize for fast load times (<2 seconds per page).
+- **Scalability**: Ensure the application can handle increased traffic or data load.
+
+## Installation
+To set up the project locally:
+```bash
+git clone https://github.com/morgansansone/gro-project.git
+cd gro-project
+npm install
+
+## Usage
+### Available Scripts
 In the project directory, you can run:
+- \`npm start\`: Runs the app in development mode.
+- \`npm test\`: Launches the test runner in interactive watch mode.
+- \`npm run build\`: Builds the app for production.
+- \`npm run eject\`: Ejects the app for full configuration control (one-way operation).
 
-### `npm start`
+### Accessing the App
+1. Run the app:
+   \`\`\`bash
+   npm start
+   \`\`\`
+2. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technical Details
+### Frontend
+- Built with **React** and a CSS framework (Bootstrap or Tailwind CSS).
+- Responsive design for mobile, tablet, and desktop devices.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
+- **Database**: Google Cloud Server.
+- **API**: TBD
+- **AI Integration**: AI-powered budget recommendations and expense categorization.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Testing
+- Unit tests and integration tests for critical components.
+- Usability testing with at least 5 users.
 
 ### Deployment
+- Deployed to a Windows server or cloud instance (e.g., Azure, AWS).
+- Security scan using tools like OWASP ZAP.
+- Accessibility audit using tools like WAVE or Axe.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+EOF
