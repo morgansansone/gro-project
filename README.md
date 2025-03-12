@@ -13,15 +13,76 @@ A web-based application for managing personal budgets, tracking expenses, and vi
 - [License](#license)
 
 ## About
-The Gro Project is a modern, web-based application designed to help users manage their budgets, track expenses, and visualize financial data. It is built with a focus on usability, accessibility, and scalability.
+The Grow App is a savings and financial planning tool that combines goal-setting, gamification, and AI-driven fund allocation. Users can set savings goals, track their progress, and watch their goals "grow" like plants. Once a goal is achieved, it moves to a "completed goals" section. The app also includes bank settings, user settings, and educational resources to help users manage their finances effectively.
 
 ## Features
-- **Budget Dashboard**: View income, expenses, savings goals, and visualizations (e.g., pie charts, bar graphs).
-- **Transaction History**: Filter and view past transactions.
-- **User Account Settings**: Update profile information and budget preferences (e.g., currency, default categories).
-- **AI-Powered Recommendations**: Get budget recommendations and expense categorization based on transaction patterns.
-- **Export Functionality**: Export budgets and transactions to CSV or PDF.
-- **Recurring Entries**: Set recurring expenses or income entries.
+
+### 1. **Dashboard**
+- Set savings goals with:
+  - **Goal Name**: Custom name (e.g., "Vacation Fund").
+  - **Goal Amount**: Total amount needed.
+  - **Priority Level**: High, medium, or low.
+  - **Plant Type**: Choose a plant to represent your goal.
+- Track progress visually as your plant grows.
+
+### 2. **Allocate Funds**
+- **AI-Driven Allocation**:
+  - Automatically distributes funds based on goal priority and amount.
+- **Manual Allocation**:
+  - Allocate funds to specific goals manually.
+- Choose to allocate funds to **All Goals** or **One Specific Goal**.
+
+### 3. **Plants Section**
+- **Active Goals**:
+  - Plants grow as you save money.
+- **Completed Goals**:
+  - Fully funded goals move to the "Completed Goals" section.
+
+### 4. **Bank Settings**
+- Securely input and view:
+  - Routing number.
+  - Bank account number.
+
+### 5. **Learn More**
+- Tutorials and guides on using the app.
+- Explains how the **Allocate Funds** feature works.
+
+### 6. **User Settings**
+- Update:
+  - First name, last name, routing number, and bank account number.
+- Change email or password via email verification.
+
+### 7. **Main Page**
+- Navigation buttons:
+  - **Features**: Overview of app features.
+  - **Plants**: View active and completed goals.
+  - **About**: Learn more about the app.
+- **Login/Get Started**:
+  - Log in with email and password.
+  - Create a new account with:
+    - First name, last name, email, and password.
+
+### 8. **Add New Goal**
+- Input:
+  - Goal name, goal amount, plant type, and priority level.
+- Create the goal and start saving.
+
+### 9. **Current Goal Settings**
+- View and edit:
+  - Goal name, goal amount, amount saved, and priority level.
+- Add funds directly to the goal.
+
+## How It Works
+1. **Set a Goal**:
+   - Example: "New Laptop" ($1,500, Cactus, High Priority).
+2. **Allocate Funds**:
+   - Add $500 to savings. AI allocates $300 to "New Laptop" and $200 to other goals.
+3. **Track Progress**:
+   - Watch the cactus grow as you save.
+4. **Complete Goal**:
+   - Once $1,500 is saved, the cactus is fully grown, and the goal moves to **Completed Goals**.
+
+   
 
 ## Requirements
 ### Functional Requirements
