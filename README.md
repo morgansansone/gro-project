@@ -13,7 +13,7 @@ A web-based application for managing personal budgets, tracking expenses, and vi
 - [License](#license)
 
 ## About
-The Gro App is a savings and financial planning tool that combines goal-setting, gamification, and AI-driven fund allocation. Users can set savings goals, track their progress, and watch their goals "grow" like plants. Once a goal is achieved, it moves to a "completed goals" section. The app also includes bank settings, user settings, and educational resources to help users manage their finances effectively.
+The Grow App is a savings and financial planning tool that combines goal-setting, gamification, and AI-driven fund allocation. Users can set savings goals, track their progress, and watch their goals "grow" like plants. Once a goal is achieved, it moves to a "completed goals" section. The app also includes bank settings, user settings, and educational resources to help users manage their finances effectively.
 
 ## Features
 
@@ -82,7 +82,7 @@ The Gro App is a savings and financial planning tool that combines goal-setting,
 4. **Complete Goal**:
    - Once $1,500 is saved, the cactus is fully grown, and the goal moves to **Completed Goals**.
 
-   
+
 
 ## Requirements
 ### Functional Requirements
