@@ -1,5 +1,7 @@
 import React from 'react';
 import Dashboard from './Dash';
+import Login from './Login';
+import Register from './Register';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -18,8 +20,8 @@ function App() {
 
         {/* Right Side*/}
         <div className="flex items-center space-x-4">
-          <a href="#" className="text-gray-700 hover:text-green-700">Log In</a>
-          <a href="#" className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Get Started</a>
+          <Link to='/Login'><a href="#" className="text-gray-700 hover:text-green-700">Log In</a></Link>
+          <Link to='/Register'><a href="#" className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Get Started</a></Link>
         </div>
       </nav>
 
@@ -37,7 +39,7 @@ function App() {
             />
           </h2>
             <p className="text-lg text-gray-600 mb-6">Mindful savings goals made easy</p>
-            <Link to='/Dashboard'><button className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-800">
+            <Link to='/Register'><button className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-800">
               Sign Up Today
             </button>
             </Link>

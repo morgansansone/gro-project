@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 import Dashboard from './Dash';
+import Login from './Login';
+import Register from './Register';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +16,8 @@ root.render(
   <Routes>
     <Route path="/" element={<App />} />
     <Route path="/Dashboard" element={<Dashboard />} />
+    <Route path ="/Login" element={<Login />} />
+    <Route path ="/Register" element={<Register />} />
   </Routes>
   </BrowserRouter>
   </React.StrictMode>

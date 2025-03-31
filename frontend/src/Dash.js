@@ -39,7 +39,7 @@ export default function Dashboard() {
           </div>
         {/* Goals Section */}
           <div className="mt-6 bg-[#f5f7e9] p-6 rounded-lg shadow-md flex justify-between">
-            <button className="bg-green-500 text-white px-3 py-1 rounded-lg w-auto y-auto">Allocate Funds</button>            
+            <button className="bg-green-500 text-white px-3 py-1 rounded-lg w-auto h-8">Allocate Funds</button>            
               {goals.map((goal, index) => (
                 <div key={index} className="text-center">
                   <div className="w-16 h-16 bg-brown-500 rounded-b-lg mx-auto"></div>
