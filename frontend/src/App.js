@@ -39,7 +39,7 @@ function App() {
             />
           </h2>
             <p className="text-lg text-gray-600 mb-6">Mindful savings goals made easy</p>
-            <Link to='/Register'><button className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-800">
+            <Link to='/Dashboard'><button className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-800">
               Sign Up Today
             </button>
             </Link>

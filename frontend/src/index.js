@@ -8,6 +8,7 @@ import App from './App';
 import Dashboard from './Dash';
 import Login from './Login';
 import Register from './Register';
+import GoalCreate from './Goal_create.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +19,7 @@ root.render(
     <Route path="/Dashboard" element={<Dashboard />} />
     <Route path ="/Login" element={<Login />} />
     <Route path ="/Register" element={<Register />} />
+    <Route path ="/GoalCreate" element={<GoalCreate />} />
   </Routes>
   </BrowserRouter>
   </React.StrictMode>
