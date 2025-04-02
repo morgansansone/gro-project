@@ -1,7 +1,8 @@
 import React from 'react';
-import Dashboard from './Dash';
-import Login from './Login';
-import Register from './Register';
+import Dashboard from './pages/Dashboard';
+import LogIn from './pages/LogIn';
+import CreateAccount from './pages/CreateAccount';
+import GoalCreate from './pages/GoalCreate';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -20,8 +21,8 @@ function App() {
 
         {/* Right Side*/}
         <div className="flex items-center space-x-4">
-          <Link to='/Login'><a href="#" className="text-gray-700 hover:text-green-700">Log In</a></Link>
-          <Link to='/Register'><a href="#" className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Get Started</a></Link>
+          <Link to='/LogIn'><a href="#" className="text-gray-700 hover:text-green-700">Log In</a></Link>
+          <Link to='/CreateAccount'><a href="#" className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Get Started</a></Link>
         </div>
       </nav>
 
