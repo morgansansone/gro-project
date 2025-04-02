@@ -1,12 +1,25 @@
 import React from 'react';
+import { useState } from "react";
 
-function Login() {
-  return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-green-700">Login</h1>
-      <p className="text-gray-600 mt-4">Sign in to access your account.</p>
-    </div>
-  );
+function handleSubmit(event){
+    <Link to='/Dashboard' />
+    event.preventDefault();
+    <Link />
 }
 
-export default Login;
+export default function Login() {
+    return(
+       <div className="bg-{#FBFCF7} h-screen flex items-center justify-center">
+            <h1 className="item-start "> Login Page </h1>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="email">Email: </label>
+                <input type="email" id="email" name="email" required />
+                <br />
+                <label htmlFor="password">Password: </label>
+                <input type="password" id="password" name="password" required />
+                <br />
+                <button type="submit" className="bg-gray-300 px-5">Login</button>
+            </form>
+       </div>
+    );
+} 
