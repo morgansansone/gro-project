@@ -1,0 +1,21 @@
+{
+  "name": "gro-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cd frontend && react-scripts start",
+    "build": "cd frontend && react-scripts build",
+    "test": "cd frontend && react-scripts test",
+    "eject": "cd frontend && react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^4.2.4"
+  },
+  "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.16",
+    "react-refresh": "^0.17.0"
+  }
+}
