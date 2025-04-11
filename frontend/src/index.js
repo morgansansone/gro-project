@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import LogIn from './pages/LogIn';
 import CreateAccount from './pages/CreateAccount';
 import GoalCreate from './pages/GoalCreate';
+import UserSettings from './pages/UserSettings';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
     <Route path ="/LogIn" element={<LogIn />} />
     <Route path ="/CreateAccount" element={<CreateAccount />} />
     <Route path ="/GoalCreate" element={<GoalCreate />} />
+    <Route path ="/UserSettings" element={<UserSettings />} />
   </Routes>
   </BrowserRouter>
   </React.StrictMode>
