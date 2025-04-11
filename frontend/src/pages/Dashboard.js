@@ -2,9 +2,22 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./NavLogin.js";
 import GoalCreate from "./GoalCreate.js";
+import Modal from "./Allocate.js";
+import UserSettings from "./UserSettings.js";
+import GoalSettings from "./GoalSettings.js";
 
 export default function Dashboard() {
-  
+  const savings_amount = 1000; // example saving amount, connect with data
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="h-screen bg-[#FBFCF7]">      
         {/* Topbar */}      
@@ -25,12 +38,19 @@ export default function Dashboard() {
         <main className="flex p-6">
           <div className="w-[950px]">
           <div className="flex justify-between items-baseline w-full mb-2">
-              <div className="text-3xl  text-[#274A21] float-left m-10">Total Savings: $</div>
-              <Link to='/GoalCreate'><a href='#' className="text-lg float-right text-gray-500">+ Create New Goal</a></Link>
+              <div className="text-3xl  text-[#274A21] float-left m-10">Total Savings: ${savings_amount}</div>
+              <Link to='/GoalCreate'><a href='#' className="text-lg float-right text-gray-500 underline">+ Create New Goal</a></Link>
           </div>
         {/* Goals Section */}
           <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg shadow-md flex justify-between">
-            <button className="bg-green-500 text-white px-3 py-1 rounded-lg w-auto h-8">Allocate Funds</button>
+            <div>
+            <button onClick={openModal} className="bg-green-500 text-white px-3 py-1 rounded-lg w-auto h-8"> Allocate Funds</button>
+
+              <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <h2>Modal Title</h2>
+                <p>This is the content of the modal.</p>
+              </Modal>
+            </div>
             <div className="flex overflow-scroll justify-evenly w-full">
 
             </div>
