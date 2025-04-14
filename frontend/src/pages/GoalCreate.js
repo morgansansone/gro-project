@@ -2,21 +2,31 @@ import Navbar from './NavLogin.js';
 import React from 'react';
 import { usestate } from 'react';
 
-const PriorityButton = ({label, onClick}) => {
+const PriorityButton = ({ label, onClick, selected }) => {
     return (
-        <button onClick={onClick}
-        className ="w-[45px] h-[45px] bg-[#E9E7D4] hover:bg-[#b9b8a7] text-red-600 rounded-full flex items-center justify-center text-[30px] leading-none"
-        title={label}>
-            {label}
-        </button>
+      <button
+        onClick={onClick}
+        className={`w-[45px] h-[45px] rounded-full flex items-center justify-center text-[30px] leading-none
+          text-red-600 transition-colors duration-200
+          ${selected ? "bg-[#b9b8a7]" : "bg-[#E9E7D4] hover:bg-[#b9b8a7]"}`}
+        title={label}
+      >
+        {label}
+      </button>
     );
-};  
+  };
 
 export default function GoalCreate() {
     const [selectedPlant, setSelectedPlant] = React.useState(null);
 
     const handlePlantSelect = (plant) => {
         setSelectedPlant(plant);
+    };
+    
+    const [selectedPriority, setSelectedPriority] = React.useState(null);
+
+    const handlePrioritySelect = (priority) => {
+        setSelectedPriority(priority);
     };
 
     const plantOptions = ["Sunflower", "Cactus", "Rose"];
@@ -28,14 +38,19 @@ export default function GoalCreate() {
                 <div className="w-8/12 px-12 mt-20 p-10 bg-[#f5f7e9] rounged-lg shadow-md border-s">
                     <div className="flex justify-evenly items-center flex-nowrap whitespace-nowrap mb-10 w-full">
                         <div className="flex items-center gap-2">
-                            <div className="ml-12 mr-8 text-3xl">Goal Name: </div>
-                            <input type="text" className="border border-gray-300 bg-[#E0EBDB] rounded-md p-2" />
+                            <div className="ml-12 mr-6 text-3xl">Goal Name: </div>
+                            <input type="text" className="border border-gray-300 bg-gray-50 rounded-md p-2" />
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0 mr-10 ml-10">
                             <h2 className="mr-2">Priority: </h2>
-                            <PriorityButton label="!"  />
-                            <PriorityButton label="!!"  />
-                            <PriorityButton label="!!!" />
+                            {["!", "!!", "!!!"].map((label) => (
+                            <PriorityButton
+                            key={label}
+                            label={label}
+                            selected={selectedPriority === label}
+                            onClick={() => handlePrioritySelect(label)}
+                            />
+                        ))}
                         </div>
                     </div>
                     <div className="flex items-center w-full justify-evenly">
@@ -66,7 +81,7 @@ export default function GoalCreate() {
                             </div>
                         </div>
                     </div>
-                    <button className="bg-[#5DB151] text-white px-3 py-2 rounded-lg w-auto float-right hover:bg-[#4a8c41]">Create Goal</button>
+                    <button className="bg-[#5DB151] text-white px-3 py-2 rounded-lg w-auto float-right mt-10 hover:bg-[#4a8c41]">Create Goal</button>
                 </div>
             </div>
         </div>

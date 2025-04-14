@@ -17,9 +17,9 @@ function Home() {
               />
             </h2>
             <p className="text-lg text-gray-600 mb-6">Mindful savings goals made easy</p>
-            <button className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-800">
+            <Link to='/Dashboard'><button className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-800">
               Sign Up Today
-            </button>
+            </button></Link>
           </div>
 
           {/* Right Side: Image */}

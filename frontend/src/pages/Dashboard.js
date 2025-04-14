@@ -27,7 +27,7 @@ export default function Dashboard() {
         {/* Sidebar */}
         <aside className="w-36 bg-[#f0f4e3] p-4 space-y-4 h-48 rounded-xl float-left">
           <nav className="space-y-3">
-            <a href="#" className="block text-gray-700">New Goal</a>
+            <Link to='/GoalCreate'><a href="#" className="block text-gray-700">New Goal</a></Link>
             <a href="#" className="block text-gray-700">Plants</a>
             <a href="#" className="block text-gray-700">Bank Settings</a>
             <a href="#" className="block text-gray-700">Learn More</a>
