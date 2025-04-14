@@ -3,6 +3,7 @@ import Dashboard from './pages/Dashboard';
 import LogIn from './pages/LogIn';
 import CreateAccount from './pages/CreateAccount';
 import GoalCreate from './pages/GoalCreate';
+import UserSettings from './pages/UserSettings';
 import { Link } from 'react-router-dom';
 
 function App() {
