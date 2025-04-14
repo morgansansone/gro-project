@@ -1,9 +1,9 @@
-import Navbar from './NavLogin.js';
+import NavLogin from '../account/NavLogin.js';
 
 export default function GoalCreate() {
     return(
         <div className="h-screen bg-[#FBFCF7]">
-            <Navbar />
+            <NavLogin />
             <div>
                 <div className="flex justify-start items-baseline w-full mt-10">
                     <div className="ml-12 mr-8 text-3xl">Goal Name: </div>

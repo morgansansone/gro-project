@@ -1,23 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "./NavLogin.js";
-import GoalCreate from "./GoalCreate.js";
+import NavLogin from "./account/NavLogin.js";
 
 export default function Dashboard() {
   
   return (
-    <div className="h-screen bg-[#FBFCF7]">      
+    <div className="h-screen bg-[#f8faf3]">      
         {/* Topbar */}      
-      <Navbar />
+      <NavLogin />
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-36 bg-[#f0f4e3] p-4 space-y-4 h-48 rounded-xl float-left">
+        <aside className="w-36 bg-[#e0edd9] p-4 space-y-4 h-48 rounded-xl float-left">
           <nav className="space-y-3">
-            <a href="#" className="block text-gray-700">New Goal</a>
-            <a href="#" className="block text-gray-700">Plants</a>
-            <a href="#" className="block text-gray-700">Bank Settings</a>
-            <a href="#" className="block text-gray-700">Learn More</a>
+            <Link to="/goal-create" className="block text-gray-700 hover:text-green-600">
+              New Goal
+            </Link>
+            <Link to="/dashboard-plants" className="block text-gray-700 hover:text-green-600">
+              Plants
+            </Link>
+            <Link to="/bank-settings" className="block text-gray-700 hover:text-green-600">
+              Bank Settings
+            </Link>
+            <Link to="/learn-more" className="block text-gray-700 hover:text-green-600">
+              Learn More
+            </Link>
           </nav>
         </aside>
 

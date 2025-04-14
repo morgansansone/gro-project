@@ -5,23 +5,12 @@ import reportWebVitals from './reportWebVitals';
 
 import './index.css';
 import App from './App';
-import Dashboard from './pages/Dashboard';
-import LogIn from './pages/LogIn';
-import CreateAccount from './pages/CreateAccount';
-import GoalCreate from './pages/GoalCreate';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  <BrowserRouter>
-  <Routes>
-    <Route path="/" element={<App />} />
-    <Route path="/Dashboard" element={<Dashboard />} />
-    <Route path ="/LogIn" element={<LogIn />} />
-    <Route path ="/CreateAccount" element={<CreateAccount />} />
-    <Route path ="/GoalCreate" element={<GoalCreate />} />
-  </Routes>
-  </BrowserRouter>
+    <App />
   </React.StrictMode>
 );
 

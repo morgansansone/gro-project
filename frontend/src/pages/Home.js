@@ -1,8 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import NavBar from './NavBar';
 
-function Home() {
+export default function Home() {
   return (
-    <div className="p-8">
+    <div className="min-h-screen bg-[#f8faf3] p-8">    
+      <NavBar />
+
       {/* Hero Section */}
       <div className="bg-white p-8 rounded-lg shadow-lg mb-12 mt-8">
         <div className="flex flex-col md:flex-row items-center">
@@ -11,22 +15,25 @@ function Home() {
             <h2 className="text-4xl font-bold text-gray-800 mb-4 flex items-center justify-center md:justify-start">
               Tend to your savings with{" "}
               <img 
-                src="components/logo_tnsprtbkg.png" // Use the Gro logo
+                src="/components/logo_tnsprtbkg.png"
                 alt="Gro Logo" 
-                className="h-20 ml-2" // Adjust size and spacing
+                className="h-20 ml-2"
               />
             </h2>
             <p className="text-lg text-gray-600 mb-6">Mindful savings goals made easy</p>
-            <button className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-800">
-              Sign Up Today
-            </button>
+            <Link to="/dashboard">
+              <button className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-800">
+                Sign Up Today
+              </button>
+            </Link>
           </div>
 
           {/* Right Side: Image */}
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <img 
-              src="components/plant_main.png" // Replace with your image path
+              src="/components/plant_main.png"
               alt="Savings Illustration" 
+              className="max-w-full h-auto"
             />
           </div>
         </div>
@@ -60,5 +67,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;
