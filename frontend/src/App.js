@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import LogIn from './pages/account/LogIn';
 import CreateAccount from './pages/account/CreateAccount';
+import UserSettings from './pages/dash/UserSettings.js';
 import Dashboard from './pages/Dashboard';
 import ForgotPassword from './pages/account/ForgotPassword';
 import GoalCreate from './pages/dash/GoalCreate';
@@ -13,6 +14,7 @@ import DashPlants from './pages/dash/DashPlants';
 import LearnMore from './pages/dash/LearnMore';
 import BankSettings from './pages/dash/BankSettings';
 
+
 function App() {
   return (
     <Router>
@@ -20,6 +22,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/create-account" element={<CreateAccount />} />
+        <Route path ="/user-settings" element={<UserSettings />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/goal-create" element={<GoalCreate />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

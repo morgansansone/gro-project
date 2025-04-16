@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import UserSettings from '../dash/UserSettings';
 
 export default function NavLogin() {
   return (
@@ -13,9 +14,7 @@ export default function NavLogin() {
           />
         </Link>
       </div>
-      <button className="bg-[#5DB151] text-white px-3 py-2 rounded-lg w-auto float-right hover:bg-[#4a9c3f] transition-colors">
-        User Settings
-      </button>
+      <Link to='/user-settings'><button className="bg-[#5DB151] text-white px-3 py-2 rounded-lg w-auto float-right hover:bg-[#4a8c41]">User Settings</button></Link>
     </nav>
   );
 }

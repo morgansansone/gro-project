@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import NavBar from "../NavBar.js";
+import NavLogin from "../account/NavLogin.js";
 
 function DashPlants() {
   const activeGoals = [
@@ -14,7 +14,7 @@ function DashPlants() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <NavBar />
+      <NavLogin />
       
       <div className="max-w-4xl mx-auto p-6">
         <div className="flex justify-between items-center mb-8">
