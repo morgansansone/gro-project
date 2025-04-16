@@ -52,7 +52,7 @@ export default function Dashboard() {
         {/* Goals Section */}
           <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg shadow-md flex justify-between">
             <div>
-            <button onClick={openModal} className="bg-green-500 text-white px-3 py-1 rounded-lg w-auto h-8"> Allocate Funds</button>
+            <button onClick={openModal} className="bg-green-500 text-white px-3 py-1 rounded-lg w-auto h-full"> Allocate Funds</button>
 
               <Modal isOpen={isModalOpen} onClose={closeModal}>
                 <h2>Modal Title</h2>
