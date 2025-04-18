@@ -36,6 +36,7 @@ export default function GoalCreate() {
             {/* Navbar at top */}
             <NavLogin />
             <div className="flex justify-center">
+                <h2>Goal Creation</h2>
                 <div className="w-8/12 px-12 mt-20 p-10 bg-[#f5f7e9] rounged-lg shadow-md border-s">
                     <div className="flex justify-evenly items-center flex-nowrap whitespace-nowrap mb-10 w-full">
                         <div className="flex items-center gap-2">
