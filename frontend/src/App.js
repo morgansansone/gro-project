@@ -14,6 +14,8 @@ import DashPlants from './pages/dash/DashPlants';
 import LearnMore from './pages/dash/LearnMore';
 import BankSettings from './pages/dash/BankSettings';
 
+// Import the DbTest component
+import DbTest from './DbTest';
 
 function App() {
   return (
@@ -22,7 +24,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/create-account" element={<CreateAccount />} />
-        <Route path ="/user-settings" element={<UserSettings />} />
+        <Route path="/user-settings" element={<UserSettings />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/goal-create" element={<GoalCreate />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -32,6 +34,8 @@ function App() {
         <Route path="/bank-settings" element={<BankSettings />} />
         <Route path="/dashboard-plants" element={<DashPlants />} />
         <Route path="/learn-more" element={<LearnMore />} />
+        {/* Add the DbTest route below */}
+        <Route path="/db-test" element={<DbTest />} />
       </Routes>
     </Router>
   );
