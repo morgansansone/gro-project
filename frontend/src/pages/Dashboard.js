@@ -1,28 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
 import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
 
-const Goal = ({ name, amount, percent, onClick }) => {
+const getGoalImage = (type, percent) => {
+  let image = "";
+  if (type == "R")
+    if (percent >= 60) image = "/goals/R3.jpg";
+    else if (percent >= 30) image = "/goals/R2.jpg";
+    else image = "/goals/R1.jpg";
+  else if (type == "S")
+    if (percent >= 60) image = "/goals/S3.jpg";
+    else if (percent >= 30) image = "/goals/S2.jpg";
+    else image = "/goals/S1.jpg";
+  else if (type == "C")
+    if (percent >= 60) image = "/goals/C3.jpg";
+    else if (percent >= 30) image = "/goals/C2.jpg";
+    else image = "/goals/C1.jpg";  
+  else image = "/goals/R1.jpg";
+  return image; 
+};
+
+const Goal = ({ name, amount, percent, type, onClick }) => {
+  let imageSrc = getGoalImage(type, percent);
+  
   return (
     <div
       onClick={onClick}
-      className="bg-[#eef3e1] shadow-md rounded-2xl p-4 m-2 w-64 h-40 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-200"
+      className="bg-[#eef3e1] shadow-md rounded-2xl p-4 m-2 min-w-40 min-h-40 max-w-76 max-h-xl flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-200"
     >
       <div>
+        <img src={imageSrc} alt={`${type} goal phase`} className="w-full h-44 object-contain mb-2" />
         <h3 className="text-xl font-semibold text-green-800">{name}</h3>
         <p className="text-gray-600">Goal: ${amount}</p>
       </div>
-      <p className="text-sm text-gray-500 mt-1">{percent}% complete</p>
     </div>
   );
 };
 
 export default function Dashboard() {
 
- const savings_amount = 1000; // example saving amount, connect with data
+ let savings_amount = 1000; // example saving amount, connect with data
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -70,12 +90,12 @@ export default function Dashboard() {
               <Link to='/goal-create'><a href='#' className="text-lg float-right text-gray-500 underline">+ Create New Goal</a></Link>
           </div>
         {/* Goals Section */}
-          <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg shadow-md flex justify-between">
-            <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg shadow-md">
+          <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg shadow-md flex justify-between overflow-x-scroll">
+            <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg">
               <div className="flex justify-between items-center mb-4">
                 <button
                   onClick={openModal}
-                  className="bg-green-500 text-white px-6 py-2 rounded-lg w-40 h-12 text-sm font-semibold"
+                  className="bg-green-500 text-white px-4 py-2 rounded-lg max-w-40 max-h-20 text-m font-semibold"
                 >
                   Allocate Funds
                 </button>
@@ -87,9 +107,9 @@ export default function Dashboard() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <Goal name="Plant a Tree" amount={500} percent={50} />
-                <Goal name="Buy Soil" amount={300} percent={75} />
-                <Goal name="Water System" amount={200} percent={20} />
+                <Goal name="Goal 1" amount={500} percent={50} type="R" onClick={() => handleGoalClick("Buy Soil")} />
+                <Goal name="Buy Soil" amount={300} percent={75} type="S" onClick={() => handleGoalClick("Buy Soil")}  />
+                <Goal name="Water System" amount={200} percent={20} type="C" onClick={() => handleGoalClick("Buy Soil")}/>
               </div>
             </div>
           </div>
