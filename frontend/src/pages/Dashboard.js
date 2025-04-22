@@ -12,7 +12,7 @@ const getGoalImage = (type, percent) => {
     else if (percent >= 30) image = "/goals/R2.jpg";
     else image = "/goals/R1.jpg";
   else if (type == "S")
-    if (percent >= 60) image = "/goals/S3.jpg";
+    if (percent >= 60) image = "/goals/s3_c.png";
     else if (percent >= 30) image = "/goals/S2.jpg";
     else image = "/goals/S1.jpg";
   else if (type == "C")
@@ -23,9 +23,10 @@ const getGoalImage = (type, percent) => {
   return image; 
 };
 
-const Goal = ({ name, amount, percent, type, onClick }) => {
+const Goal = ({ name, amount, type, onClick }) => {
+  let percent = 0;
   let imageSrc = getGoalImage(type, percent);
-  
+  let currentAmount = 0;
   return (
     <div
       onClick={onClick}
@@ -43,7 +44,7 @@ const Goal = ({ name, amount, percent, type, onClick }) => {
 export default function Dashboard() {
 
  let savings_amount = 1000; // example saving amount, connect with data
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -107,9 +108,9 @@ export default function Dashboard() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <Goal name="Goal 1" amount={500} percent={50} type="R" onClick={() => handleGoalClick("Buy Soil")} />
-                <Goal name="Buy Soil" amount={300} percent={75} type="S" onClick={() => handleGoalClick("Buy Soil")}  />
-                <Goal name="Water System" amount={200} percent={20} type="C" onClick={() => handleGoalClick("Buy Soil")}/>
+                <Goal name="Goal 1" amount={500} type="R" onClick={() => handleGoalClick("Buy Soil")} />
+                <Goal name="Buy Soil" amount={300} type="S" onClick={() => handleGoalClick("Buy Soil")}  />
+                <Goal name="Water System" amount={200} type="C" onClick={() => handleGoalClick("Buy Soil")}/>
               </div>
             </div>
           </div>
