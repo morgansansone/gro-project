@@ -26,9 +26,6 @@ export default function Home() {
                 Sign Up Today
               </button>
             </Link>
-            <Link to='/Dashboard'><button className="bg-green-700 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-800">
-              Sign Up Today
-            </button></Link>
           </div>
 
           {/* Right Side: Image */}
