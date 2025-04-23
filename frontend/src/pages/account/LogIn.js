@@ -3,27 +3,68 @@ import { Link } from 'react-router-dom';
 import NavBar from '../NavBar';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
 
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Authentication logic would go here
-    console.log('Login attempt:', { email, password, rememberMe });
-    // Redirect would happen after successful login
-    navigate('/Dashboard');
+
+  // Email validation regex
+  const validateEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    // Client-side validation (already in place)
+    if (!email || !password) {
+      setError('Please enter both email and password.');
+      return;
+    }
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+  
+    setError('');
+  
+    // Send login data to backend
+    try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      
+      const data = await response.json();
+  
+      if (data.success) {
+        console.log('User data from backend:', data.user);
+        setUser(data.user);
+        navigate('/Dashboard');
+      } else {
+        setError(data.message || 'Login failed');
+      }
+    } catch (err) {
+      setError('Network error');
+      console.error(err);
+    }
+  };
+  
 
   return (
     <div className="min-h-screen bg-[#f8faf3] flex flex-col">
       <NavBar />
 
-      <div className="flex-grow flex items-center justify-center p-4 pt-24"> {/* Added pt-24 for top padding */}
+      <div className="flex-grow flex items-center justify-center p-4 pt-24">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
           <div className="flex items-center justify-center mb-2">
             <div className="text-3xl font-bold">Welcome back to</div>
@@ -70,9 +111,14 @@ export default function Login() {
               </div>
               <Link to="/forgot-password" className="text-blue-600 hover:text-blue-800">Forgot Password</Link>
             </div>
+
+            {/* Error message display */}
+            {error && (
+              <div className="text-red-600 text-sm text-center">{error}</div>
+            )}
             
             <button
-              onClick={() => navigate('/dashboard')}
+              type="submit"
               className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 font-medium"
             >
               Sign in
@@ -104,7 +150,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
