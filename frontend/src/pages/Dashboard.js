@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
@@ -48,8 +47,6 @@ const getGoalImage = (type, percent) => {
 
 export default function Dashboard() {
 
- let savings_amount = 1000; // example saving amount, connect with data
-const [isModalOpen, setIsModalOpen] = useState(false);
  let savings_amount = 1000; // example saving amount, connect with data
 const [isModalOpen, setIsModalOpen] = useState(false);
 
