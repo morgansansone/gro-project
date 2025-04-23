@@ -5,6 +5,27 @@ import Modal from "./dash/Allocate.js";
 import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
 
+const Goal = ({ name, goalAmount, type, onClick }) => {
+  let currentAmount = 0;
+  if (currentAmount > goalAmount) currentAmount = goalAmount;
+  let percent = 0;
+  if (currentAmount > 0) percent = currentAmount / goalAmount * 100;
+  let imageSrc = getGoalImage(type, percent);
+  return (
+    <div
+      onClick={onClick}
+      className="bg-[#eef3e1] shadow-md rounded-2xl p-4 m-2 min-w-40 min-h-40 max-w-76 max-h-xl flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-200"
+    >
+      <div>
+        <img src={imageSrc} alt={`${type} goal phase`} className="w-full h-44 object-contain mb-2" />
+        <h3 className="text-xl font-semibold text-green-800">{name}</h3>
+        <p className="text-gray-600">Amount Saved: ${currentAmount}</p>
+        <p className="text-gray-600">Goal: ${goalAmount}</p>
+      </div>
+    </div>
+  );
+};
+
 const getGoalImage = (type, percent) => {
   let image = "";
   if (type == "R")
@@ -21,24 +42,6 @@ const getGoalImage = (type, percent) => {
     else image = "/goals/C1.jpg";  
   else image = "/goals/R1.jpg";
   return image; 
-};
-
-const Goal = ({ name, amount, type, onClick }) => {
-  let percent = 0;
-  let imageSrc = getGoalImage(type, percent);
-  let currentAmount = 0;
-  return (
-    <div
-      onClick={onClick}
-      className="bg-[#eef3e1] shadow-md rounded-2xl p-4 m-2 min-w-40 min-h-40 max-w-76 max-h-xl flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-200"
-    >
-      <div>
-        <img src={imageSrc} alt={`${type} goal phase`} className="w-full h-44 object-contain mb-2" />
-        <h3 className="text-xl font-semibold text-green-800">{name}</h3>
-        <p className="text-gray-600">Goal: ${amount}</p>
-      </div>
-    </div>
-  );
 };
 
 export default function Dashboard() {
@@ -108,9 +111,9 @@ const [isModalOpen, setIsModalOpen] = useState(false);
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <Goal name="Goal 1" amount={500} type="R" onClick={() => handleGoalClick("Buy Soil")} />
-                <Goal name="Buy Soil" amount={300} type="S" onClick={() => handleGoalClick("Buy Soil")}  />
-                <Goal name="Water System" amount={200} type="C" onClick={() => handleGoalClick("Buy Soil")}/>
+                <Goal name="Goal 1" goalAmount={500} type="R" onClick={() => handleGoalClick("Buy Soil")} />
+                <Goal name="Buy Soil" goalAmount={300} type="S" onClick={() => handleGoalClick("Buy Soil")}  />
+                <Goal name="Water System" goalAmount={200} type="C" onClick={() => handleGoalClick("Buy Soil")}/>
               </div>
             </div>
           </div>
