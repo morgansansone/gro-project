@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
-import { useState } from "react";
-import UserSettings from "./dash/UserSettings.js";
-import GoalSettings from "./dash/GoalSettings.js";
+import GoalSettings from "./GoalSettings.js";
 
-const Goal = ({ name, goalAmount, type, onClick }) => {
+const Goal = ({ name, goalAmount, type, priority, onClick }) => {
   let currentAmount = 0;
   if (currentAmount > goalAmount) currentAmount = goalAmount;
   let percent = 0;
@@ -48,10 +46,16 @@ const getGoalImage = (type, percent) => {
 
 export default function Dashboard() {
 
- let savings_amount = 1000; // example saving amount, connect with data
-const [isModalOpen, setIsModalOpen] = useState(false);
- let savings_amount = 1000; // example saving amount, connect with data
-const [isModalOpen, setIsModalOpen] = useState(false);
+  let savings_amount = 1000; // example saving amount, connect with data
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGoalSettingsOpen, setIsGoalSettingsOpen] = useState(false);
+  const [selectedGoal, setSelectedGoal] = useState(null);
+
+  const handleGoalClick = (goal) => {
+    setSelectedGoal(goal);
+    setIsGoalSettingsOpen(true);
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -60,11 +64,20 @@ const [isModalOpen, setIsModalOpen] = useState(false);
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  
-  const handleGoalClick = (goalName) => {
-    console.log("Goal clicked:", goalName);
-    // Placeholder: implement navigation or modal here
+
+  const closeGoalSettings = () => {
+    setIsGoalSettingsOpen(false);
   };
+
+  const openGoalSettings = () => {
+    setIsGoalSettingsOpen(true);
+  };
+
+  const [goals, setGoals] = useState([
+    { name: "Fart", goalAmount: 500, type: "R" },
+    { name: "College Savings", goalAmount: 300, type: "S" },
+    { name: "Emergency Fund", goalAmount: 200, type: "C" }
+  ]);
   
   return (
     <div className="h-screen bg-[#f8faf3]">      
@@ -103,7 +116,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
               <div className="flex justify-between items-center mb-4">
                 <button
                   onClick={openModal}
-                  className="bg-green-500 text-white px-4 py-2 rounded-lg max-w-40 max-h-20 text-m font-semibold"
+                  className="bg-[#5DB151] text-white px-4 py-2 rounded-lg max-w-40 max-h-20 text-m"
                 >
                   Allocate Funds
                 </button>
@@ -115,9 +128,20 @@ const [isModalOpen, setIsModalOpen] = useState(false);
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <Goal name="Goal 1" goalAmount={500} type="R" onClick={() => handleGoalClick("Buy Soil")} />
-                <Goal name="Buy Soil" goalAmount={300} type="S" onClick={() => handleGoalClick("Buy Soil")}  />
-                <Goal name="Water System" goalAmount={200} type="C" onClick={() => handleGoalClick("Buy Soil")}/>
+              {goals.map((goal, index) => (
+                <Goal
+                  key={index}
+                  name={goal.name}
+                  goalAmount={goal.goalAmount}
+                  type={goal.type}
+                  onClick={() => handleGoalClick(goal)} // ✅ Use the real goal
+                />
+              ))}
+                <GoalSettings
+                  isOpen={isGoalSettingsOpen}
+                  onClose={closeGoalSettings}
+                  goal={selectedGoal}
+                />
               </div>
             </div>
           </div>
