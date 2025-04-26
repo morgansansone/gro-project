@@ -8,7 +8,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-200 bg-opacity-80 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg shadow-md p-6 w-4/5 max-w-md">
+      <div className= " bg-[#f8faf3] rounded-xl shadow-md p-6 w-4/5 max-w-md">
         <h2 className="text-xl font-semibold text-green-700 mb-4">Allocate Funds</h2>
 
         <div className="mb-4">
@@ -60,7 +60,7 @@ const Modal = ({ isOpen, onClose, children }) => {
             Cancel
           </button>
           <button
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+            className="bg-[#5DB151] hover:bg-[#4a8c41] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
             onClick={() => {
               // Handle allocate logic
               onClose(); // For this example, just close the modal

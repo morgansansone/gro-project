@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
-import GoalSettings from "./GoalSettings.js";
+import GoalSettings from "./dash/GoalSettings.js";
 
 const Goal = ({ name, goalAmount, type, priority, onClick }) => {
   let currentAmount = 0;

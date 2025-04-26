@@ -1,4 +1,4 @@
-import NavLogin from "../account/NavLogin.js";
+import Navbar from '../account/NavLogin.js';
 import React from 'react';
 import { usestate } from 'react';
 
@@ -14,7 +14,7 @@ const PriorityButton = ({ label, onClick, selected }) => {
         {label}
       </button>
     );
-  }; 
+  };
 
 export default function GoalCreate() {
     const [selectedPlant, setSelectedPlant] = React.useState(null);
@@ -22,25 +22,23 @@ export default function GoalCreate() {
     const handlePlantSelect = (plant) => {
         setSelectedPlant(plant);
     };
-
+    
     const [selectedPriority, setSelectedPriority] = React.useState(null);
- 
-     const handlePrioritySelect = (priority) => {
-         setSelectedPriority(priority);
-     };
+
+    const handlePrioritySelect = (priority) => {
+        setSelectedPriority(priority);
+    };
 
     const plantOptions = ["Sunflower", "Cactus", "Rose"];
 
     return(
         <div className="h-screen bg-[#FBFCF7]">
-            {/* Navbar at top */}
-            <NavLogin />
+            <Navbar />
             <div className="flex justify-center">
-                <h2>Goal Creation</h2>
                 <div className="w-8/12 px-12 mt-20 p-10 bg-[#f5f7e9] rounged-lg shadow-md border-s">
                     <div className="flex justify-evenly items-center flex-nowrap whitespace-nowrap mb-10 w-full">
                         <div className="flex items-center gap-2">
-                            <div className="ml-12 mr-8 text-3xl">Goal Name: </div>
+                            <div className="ml-12 mr-6 text-3xl">Goal Name: </div>
                             <input type="text" className="border border-gray-300 bg-gray-50 rounded-md p-2" />
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0 mr-10 ml-10">
