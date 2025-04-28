@@ -47,9 +47,6 @@ const getGoalImage = (type, percent) => {
 };
 
 export default function Dashboard() {
-  const savings_amount = 1000; // Replace with actual dynamic data
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   let savings_amount = 1000; // example saving amount, connect with data
 
   const [isModalOpen, setIsModalOpen] = useState(false);
