@@ -11,7 +11,7 @@ const Goal = ({ name, goalAmount, type, priority, onClick }) => {
   let currentAmount = 0;
   if (currentAmount > goalAmount) currentAmount = goalAmount;
   let percent = 0;
-  if (currentAmount > 0 && goalAmount > 0) percent = currentAmount / goalAmount * 100;
+  if (currentAmount > 0 && goalAmount > 0) percent = (currentAmount / goalAmount) * 100;
   let imageSrc = getGoalImage(type, percent);
 
   return (
@@ -30,21 +30,20 @@ const Goal = ({ name, goalAmount, type, priority, onClick }) => {
 };
 
 const getGoalImage = (type, percent) => {
-  let image = "";
-  if (type == "R")
-    if (percent >= 60) image = "/goals/R3.png";
-    else if (percent >= 30) image = "/goals/R2.png";
-    else image = "/goals/R1.png";
-  else if (type == "S")
-    if (percent >= 60) image = "/goals/S3.png";
-    else if (percent >= 30) image = "/goals/S2.png";
-    else image = "/goals/S1.png";
-  else if (type == "C")
-    if (percent >= 60) image = "/goals/C3.png";
-    else if (percent >= 30) image = "/goals/C2.png";
-    else image = "/goals/C1.png";  
-  else image = "/goals/R1.png";
-  return image; 
+  if (type === "R") {
+    if (percent >= 60) return "/goals/R3.png";
+    if (percent >= 30) return "/goals/R2.png";
+    return "/goals/R1.png";
+  } else if (type === "S") {
+    if (percent >= 60) return "/goals/S3.png";
+    if (percent >= 30) return "/goals/S2.png";
+    return "/goals/S1.png";
+  } else if (type === "C") {
+    if (percent >= 60) return "/goals/C3.png";
+    if (percent >= 30) return "/goals/C2.png";
+    return "/goals/C1.png";
+  }
+  return "/goals/R1.png"; // default
 };
 
 export default function Dashboard() {
