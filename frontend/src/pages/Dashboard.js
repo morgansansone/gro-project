@@ -1,8 +1,50 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
 import SideBar from "./dash/SideBar.js";
+import { useState } from "react";
+import UserSettings from "./dash/UserSettings.js";
+import GoalSettings from "./dash/GoalSettings.js";
+
+const Goal = ({ name, goalAmount, type, onClick }) => {
+  let currentAmount = 0;
+  if (currentAmount > goalAmount) currentAmount = goalAmount;
+  let percent = 0;
+  if (currentAmount > 0 && goalAmount > 0) percent = currentAmount / goalAmount * 100;
+  let imageSrc = getGoalImage(type, percent);
+
+  return (
+    <div
+      onClick={onClick}
+      className="bg-[#eef3e1] shadow-md rounded-2xl p-4 m-2 min-w-40 min-h-40 max-w-76 max-h-xl flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-200"
+    >
+      <div>
+        <img src={imageSrc} alt={`${type} goal phase`} className="w-full h-44 object-contain mb-2" />
+        <h3 className="text-xl font-semibold text-green-800">{name}</h3>
+        <p className="text-gray-600">Amount Saved: ${currentAmount}</p>
+        <p className="text-gray-600">Goal: ${goalAmount}</p>
+      </div>
+    </div>
+  );
+};
+
+const getGoalImage = (type, percent) => {
+  let image = "";
+  if (type == "R")
+    if (percent >= 60) image = "/goals/R3.png";
+    else if (percent >= 30) image = "/goals/R2.png";
+    else image = "/goals/R1.png";
+  else if (type == "S")
+    if (percent >= 60) image = "/goals/S3.png";
+    else if (percent >= 30) image = "/goals/S2.png";
+    else image = "/goals/S1.png";
+  else if (type == "C")
+    if (percent >= 60) image = "/goals/C3.png";
+    else if (percent >= 30) image = "/goals/C2.png";
+    else image = "/goals/C1.png";  
+  else image = "/goals/R1.png";
+  return image; 
+};
 
 export default function Dashboard() {
   const savings_amount = 1000; // Replace with actual dynamic data
@@ -10,6 +52,11 @@ export default function Dashboard() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  
+  const handleGoalClick = (goalName) => {
+    console.log("Goal clicked:", goalName);
+    // Placeholder: implement navigation or modal here
+  };
 
   return (
     <div className="min-h-screen bg-[#FBFCF7] flex flex-col">
@@ -36,6 +83,7 @@ export default function Dashboard() {
               </Link>
             </div>
 
+
             <div className="p-6 border border-gray-200 rounded-2xl bg-[#f9f9f3] shadow-md mb-8">
               <h2 className="font-semibold text-xl text-gray-800 mb-4">Goals & Funds</h2>
               <button
@@ -50,10 +98,20 @@ export default function Dashboard() {
                 <p>This is the content of the modal.</p>
               </Modal>
             </div>
+                  Allocate Funds
+                </button>
 
-            {/* Placeholder for goals */}
-            <div className="p-6 border border-dashed border-gray-300 rounded-2xl bg-[#f9f9f3] text-gray-500 flex items-center justify-center shadow-md">
-              Your goals will show up here...
+                <Modal isOpen={isModalOpen} onClose={closeModal}>
+                  <h2>Modal Title</h2>
+                  <p>This is the content of the modal.</p>
+                </Modal>
+              </div>
+
+              <div className="flex flex-wrap gap-4">
+                <Goal name="Goal 1" goalAmount={500} type="R" onClick={() => handleGoalClick("Buy Soil")} />
+                <Goal name="Buy Soil" goalAmount={300} type="S" onClick={() => handleGoalClick("Buy Soil")}  />
+                <Goal name="Water System" goalAmount={200} type="C" onClick={() => handleGoalClick("Buy Soil")}/>
+              </div>
             </div>
           </div>
         </main>

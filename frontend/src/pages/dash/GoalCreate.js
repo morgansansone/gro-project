@@ -34,7 +34,6 @@ export default function GoalCreate() {
         <div className="min-h-screen bg-[#FBFCF7] flex flex-col">
             {/* Navbar */}
             <NavLogin />
-
             {/* Sidebar + Main Content */}
             <div className="flex flex-1">
                 {/* Sidebar */}
