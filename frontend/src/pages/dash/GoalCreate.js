@@ -24,12 +24,6 @@ export default function GoalCreate() {
     const handlePlantSelect = (plant) => {
         setSelectedPlant(plant);
     };
-    
-    const [selectedPriority, setSelectedPriority] = React.useState(null);
-
-    const handlePrioritySelect = (priority) => {
-        setSelectedPriority(priority);
-    };
 
     const plantOptions = ["Sunflower", "Cactus", "Rose"];
     

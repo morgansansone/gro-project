@@ -122,18 +122,21 @@ export default function Dashboard() {
                   goalAmount={goal.goalAmount}
                   type={goal.type}
                   onClick={() => handleGoalClick(goal)} // ✅ Use the real goal
-                />
-              ))}
-                <GoalSettings
-                  isOpen={isGoalSettingsOpen}
-                  onClose={closeGoalSettings}
-                  goal={selectedGoal}
-                />
+                  />
+                ))}
               </div>
             </div>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
-  );
+
+    {/* Goal Settings Modal */}
+    <GoalSettings
+      isOpen={isGoalSettingsOpen}
+      onClose={closeGoalSettings}
+      goal={selectedGoal}
+    />
+  </div>
+);
 }
