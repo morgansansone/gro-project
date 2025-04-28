@@ -7,10 +7,10 @@ import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
 
 const Goal = ({ name, goalAmount, type, onClick }) => {
-  let currentAmount = 0;
+  let currentAmount = 0; // Placeholder for actual current amount logic
   if (currentAmount > goalAmount) currentAmount = goalAmount;
   let percent = 0;
-  if (currentAmount > 0 && goalAmount > 0) percent = currentAmount / goalAmount * 100;
+  if (currentAmount > 0 && goalAmount > 0) percent = (currentAmount / goalAmount) * 100;
   let imageSrc = getGoalImage(type, percent);
 
   return (
@@ -29,21 +29,20 @@ const Goal = ({ name, goalAmount, type, onClick }) => {
 };
 
 const getGoalImage = (type, percent) => {
-  let image = "";
-  if (type == "R")
-    if (percent >= 60) image = "/goals/R3.png";
-    else if (percent >= 30) image = "/goals/R2.png";
-    else image = "/goals/R1.png";
-  else if (type == "S")
-    if (percent >= 60) image = "/goals/S3.png";
-    else if (percent >= 30) image = "/goals/S2.png";
-    else image = "/goals/S1.png";
-  else if (type == "C")
-    if (percent >= 60) image = "/goals/C3.png";
-    else if (percent >= 30) image = "/goals/C2.png";
-    else image = "/goals/C1.png";  
-  else image = "/goals/R1.png";
-  return image; 
+  if (type === "R") {
+    if (percent >= 60) return "/goals/R3.png";
+    if (percent >= 30) return "/goals/R2.png";
+    return "/goals/R1.png";
+  } else if (type === "S") {
+    if (percent >= 60) return "/goals/S3.png";
+    if (percent >= 30) return "/goals/S2.png";
+    return "/goals/S1.png";
+  } else if (type === "C") {
+    if (percent >= 60) return "/goals/C3.png";
+    if (percent >= 30) return "/goals/C2.png";
+    return "/goals/C1.png";
+  }
+  return "/goals/R1.png"; // default
 };
 
 export default function Dashboard() {
@@ -52,10 +51,10 @@ export default function Dashboard() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  
+
   const handleGoalClick = (goalName) => {
     console.log("Goal clicked:", goalName);
-    // Placeholder: implement navigation or modal here
+    // Implement navigation or opening goal settings
   };
 
   return (
@@ -71,6 +70,7 @@ export default function Dashboard() {
         {/* Main Content */}
         <main className="flex-1 p-8 overflow-auto">
           <div className="max-w-4xl mx-auto bg-[#f5f7e9] p-8 rounded-2xl shadow-md border border-gray-200">
+            {/* Header */}
             <div className="flex justify-between items-center mb-8">
               <h1 className="text-3xl font-bold text-green-700">
                 Total Savings: ${savings_amount}
@@ -83,7 +83,7 @@ export default function Dashboard() {
               </Link>
             </div>
 
-
+            {/* Allocate Funds Section */}
             <div className="p-6 border border-gray-200 rounded-2xl bg-[#f9f9f3] shadow-md mb-8">
               <h2 className="font-semibold text-xl text-gray-800 mb-4">Goals & Funds</h2>
               <button
@@ -94,24 +94,16 @@ export default function Dashboard() {
               </button>
 
               <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <h2>Modal Title</h2>
-                <p>This is the content of the modal.</p>
+                <h2 className="text-2xl font-bold mb-4">Allocate Funds</h2>
+                <p className="text-gray-700">This is the content of the modal.</p>
               </Modal>
             </div>
-                  Allocate Funds
-                </button>
 
-                <Modal isOpen={isModalOpen} onClose={closeModal}>
-                  <h2>Modal Title</h2>
-                  <p>This is the content of the modal.</p>
-                </Modal>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                <Goal name="Goal 1" goalAmount={500} type="R" onClick={() => handleGoalClick("Buy Soil")} />
-                <Goal name="Buy Soil" goalAmount={300} type="S" onClick={() => handleGoalClick("Buy Soil")}  />
-                <Goal name="Water System" goalAmount={200} type="C" onClick={() => handleGoalClick("Buy Soil")}/>
-              </div>
+            {/* Goals List */}
+            <div className="flex flex-wrap gap-4">
+              <Goal name="Goal 1" goalAmount={500} type="R" onClick={() => handleGoalClick("Goal 1")} />
+              <Goal name="Buy Soil" goalAmount={300} type="S" onClick={() => handleGoalClick("Buy Soil")} />
+              <Goal name="Water System" goalAmount={200} type="C" onClick={() => handleGoalClick("Water System")} />
             </div>
           </div>
         </main>
