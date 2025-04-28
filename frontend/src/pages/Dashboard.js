@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
+import SideBar from "./dash/SideBar.js";
 import { useState } from "react";
 import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
@@ -46,62 +47,57 @@ const getGoalImage = (type, percent) => {
 };
 
 export default function Dashboard() {
+  const savings_amount = 1000; // Replace with actual dynamic data
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
- let savings_amount = 1000; // example saving amount, connect with data
-const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   
   const handleGoalClick = (goalName) => {
     console.log("Goal clicked:", goalName);
     // Placeholder: implement navigation or modal here
   };
-  
+
   return (
-    <div className="h-screen bg-[#f8faf3]">      
-        {/* Topbar */}      
+    <div className="min-h-screen bg-[#FBFCF7] flex flex-col">
+      {/* Navbar */}
       <NavLogin />
 
-      <div className="flex">
+      {/* Sidebar + Content */}
+      <div className="flex flex-1">
         {/* Sidebar */}
-        <aside className="w-36 bg-[#e0edd9] p-4 space-y-4 h-48 rounded-xl float-left">
-          <nav className="space-y-3">
-            <Link to="/goal-create" className="block text-gray-700 hover:text-green-600">
-              New Goal
-            </Link>
-            <Link to="/dashboard-plants" className="block text-gray-700 hover:text-green-600">
-              Plants
-            </Link>
-            <Link to="/bank-settings" className="block text-gray-700 hover:text-green-600">
-              Bank Settings
-            </Link>
-            <Link to="/learn-more" className="block text-gray-700 hover:text-green-600">
-              Learn More
-            </Link>
-          </nav>
-        </aside>
+        <SideBar />
 
-        {/* dash */}
-        <main className="flex p-6">
-          <div className="w-[950px]">
-          <div className="flex justify-between items-baseline w-full mb-2">
-              <div className="text-3xl  text-[#274A21] float-left m-10">Total Savings: ${savings_amount}</div>
-              <Link to='/goal-create'><a href='#' className="text-lg float-right text-gray-500 underline">+ Create New Goal</a></Link>
-          </div>
-        {/* Goals Section */}
-          <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg shadow-md flex justify-between overflow-x-scroll">
-            <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg">
-              <div className="flex justify-between items-center mb-4">
-                <button
-                  onClick={openModal}
-                  className="bg-green-500 text-white px-4 py-2 rounded-lg max-w-40 max-h-20 text-m font-semibold"
-                >
+        {/* Main Content */}
+        <main className="flex-1 p-8 overflow-auto">
+          <div className="max-w-4xl mx-auto bg-[#f5f7e9] p-8 rounded-2xl shadow-md border border-gray-200">
+            <div className="flex justify-between items-center mb-8">
+              <h1 className="text-3xl font-bold text-green-700">
+                Total Savings: ${savings_amount}
+              </h1>
+              <Link
+                to="/goal-create"
+                className="text-lg text-gray-500 underline"
+              >
+                + Create New Goal
+              </Link>
+            </div>
+
+
+            <div className="p-6 border border-gray-200 rounded-2xl bg-[#f9f9f3] shadow-md mb-8">
+              <h2 className="font-semibold text-xl text-gray-800 mb-4">Goals & Funds</h2>
+              <button
+                onClick={openModal}
+                className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition"
+              >
+                Allocate Funds
+              </button>
+
+              <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <h2>Modal Title</h2>
+                <p>This is the content of the modal.</p>
+              </Modal>
+            </div>
                   Allocate Funds
                 </button>
 
@@ -118,9 +114,8 @@ const [isModalOpen, setIsModalOpen] = useState(false);
               </div>
             </div>
           </div>
-          </div>
         </main>
-        </div>
+      </div>
     </div>
   );
 }
