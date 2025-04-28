@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
@@ -6,8 +7,8 @@ import { useState } from "react";
 import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
 
-const Goal = ({ name, goalAmount, type, onClick }) => {
-  let currentAmount = 0; // Placeholder for actual current amount logic
+const Goal = ({ name, goalAmount, type, priority, onClick }) => {
+  let currentAmount = 0;
   if (currentAmount > goalAmount) currentAmount = goalAmount;
   let percent = 0;
   if (currentAmount > 0 && goalAmount > 0) percent = (currentAmount / goalAmount) * 100;
@@ -49,14 +50,39 @@ export default function Dashboard() {
   const savings_amount = 1000; // Replace with actual dynamic data
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  let savings_amount = 1000; // example saving amount, connect with data
 
-  const handleGoalClick = (goalName) => {
-    console.log("Goal clicked:", goalName);
-    // Implement navigation or opening goal settings
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGoalSettingsOpen, setIsGoalSettingsOpen] = useState(false);
+  const [selectedGoal, setSelectedGoal] = useState(null);
+
+  const handleGoalClick = (goal) => {
+    setSelectedGoal(goal);
+    setIsGoalSettingsOpen(true);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const closeGoalSettings = () => {
+    setIsGoalSettingsOpen(false);
+  };
+
+  const openGoalSettings = () => {
+    setIsGoalSettingsOpen(true);
+  };
+
+  const [goals, setGoals] = useState([
+    { name: "Fart", goalAmount: 500, type: "R" },
+    { name: "College Savings", goalAmount: 300, type: "S" },
+    { name: "Emergency Fund", goalAmount: 200, type: "C" }
+  ]);
+  
   return (
     <div className="min-h-screen bg-[#FBFCF7] flex flex-col">
       {/* Navbar */}
@@ -67,43 +93,46 @@ export default function Dashboard() {
         {/* Sidebar */}
         <SideBar />
 
-        {/* Main Content */}
-        <main className="flex-1 p-8 overflow-auto">
-          <div className="max-w-4xl mx-auto bg-[#f5f7e9] p-8 rounded-2xl shadow-md border border-gray-200">
-            {/* Header */}
-            <div className="flex justify-between items-center mb-8">
-              <h1 className="text-3xl font-bold text-green-700">
-                Total Savings: ${savings_amount}
-              </h1>
-              <Link
-                to="/goal-create"
-                className="text-lg text-gray-500 underline"
-              >
-                + Create New Goal
-              </Link>
-            </div>
+        {/* dash */}
+        <main className="flex p-6">
+          <div className="w-[950px]">
+          <div className="flex justify-between items-baseline w-full mb-2">
+              <div className="text-3xl  text-[#274A21] float-left m-10">Total Savings: ${savings_amount}</div>
+              <Link to='/goal-create'><a href='#' className="text-lg float-right text-gray-500 underline">+ Create New Goal</a></Link>
+          </div>
+        {/* Goals Section */}
+          <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg shadow-md flex justify-between overflow-x-scroll">
+            <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg">
+              <div className="flex justify-between items-center mb-4">
+                <button
+                  onClick={openModal}
+                  className="bg-[#5DB151] text-white px-4 py-2 rounded-lg max-w-40 max-h-20 text-m"
+                >
+                  Allocate Funds
+                </button>
 
-            {/* Allocate Funds Section */}
-            <div className="p-6 border border-gray-200 rounded-2xl bg-[#f9f9f3] shadow-md mb-8">
-              <h2 className="font-semibold text-xl text-gray-800 mb-4">Goals & Funds</h2>
-              <button
-                onClick={openModal}
-                className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition"
-              >
-                Allocate Funds
-              </button>
+                <Modal isOpen={isModalOpen} onClose={closeModal}>
+                  <h2>Modal Title</h2>
+                  <p>This is the content of the modal.</p>
+                </Modal>
+              </div>
 
-              <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <h2 className="text-2xl font-bold mb-4">Allocate Funds</h2>
-                <p className="text-gray-700">This is the content of the modal.</p>
-              </Modal>
-            </div>
-
-            {/* Goals List */}
-            <div className="flex flex-wrap gap-4">
-              <Goal name="Goal 1" goalAmount={500} type="R" onClick={() => handleGoalClick("Goal 1")} />
-              <Goal name="Buy Soil" goalAmount={300} type="S" onClick={() => handleGoalClick("Buy Soil")} />
-              <Goal name="Water System" goalAmount={200} type="C" onClick={() => handleGoalClick("Water System")} />
+              <div className="flex flex-wrap gap-4">
+              {goals.map((goal, index) => (
+                <Goal
+                  key={index}
+                  name={goal.name}
+                  goalAmount={goal.goalAmount}
+                  type={goal.type}
+                  onClick={() => handleGoalClick(goal)} // ✅ Use the real goal
+                />
+              ))}
+                <GoalSettings
+                  isOpen={isGoalSettingsOpen}
+                  onClose={closeGoalSettings}
+                  goal={selectedGoal}
+                />
+              </div>
             </div>
           </div>
         </main>

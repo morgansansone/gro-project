@@ -1,3 +1,4 @@
+
 import NavLogin from "../account/NavLogin.js";
 import SideBar from "./SideBar.js";
 import React from 'react';
@@ -14,7 +15,7 @@ const PriorityButton = ({ label, onClick, selected }) => {
             {label}
         </button>
     );
-};
+  };
 
 export default function GoalCreate() {
     const [selectedPlant, setSelectedPlant] = React.useState(null);
@@ -23,13 +24,15 @@ export default function GoalCreate() {
     const handlePlantSelect = (plant) => {
         setSelectedPlant(plant);
     };
+    
+    const [selectedPriority, setSelectedPriority] = React.useState(null);
 
     const handlePrioritySelect = (priority) => {
         setSelectedPriority(priority);
     };
 
     const plantOptions = ["Sunflower", "Cactus", "Rose"];
-
+    
     return (
         <div className="min-h-screen bg-[#FBFCF7] flex flex-col">
             {/* Navbar */}
