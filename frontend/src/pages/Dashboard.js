@@ -1,7 +1,10 @@
-import { useState } from "react";
+
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
+import SideBar from "./dash/SideBar.js";
+import { useState } from "react";
+import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
 
 const Goal = ({ name, goalAmount, type, priority, onClick }) => {
@@ -45,6 +48,8 @@ const getGoalImage = (type, percent) => {
 };
 
 export default function Dashboard() {
+  const savings_amount = 1000; // Replace with actual dynamic data
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   let savings_amount = 1000; // example saving amount, connect with data
 
@@ -80,28 +85,14 @@ export default function Dashboard() {
   ]);
   
   return (
-    <div className="h-screen bg-[#f8faf3]">      
-        {/* Topbar */}      
+    <div className="min-h-screen bg-[#FBFCF7] flex flex-col">
+      {/* Navbar */}
       <NavLogin />
 
-      <div className="flex">
+      {/* Sidebar + Content */}
+      <div className="flex flex-1">
         {/* Sidebar */}
-        <aside className="w-36 bg-[#e0edd9] p-4 space-y-4 h-48 rounded-xl float-left">
-          <nav className="space-y-3">
-            <Link to="/goal-create" className="block text-gray-700 hover:text-green-600">
-              New Goal
-            </Link>
-            <Link to="/dashboard-plants" className="block text-gray-700 hover:text-green-600">
-              Plants
-            </Link>
-            <Link to="/bank-settings" className="block text-gray-700 hover:text-green-600">
-              Bank Settings
-            </Link>
-            <Link to="/learn-more" className="block text-gray-700 hover:text-green-600">
-              Learn More
-            </Link>
-          </nav>
-        </aside>
+        <SideBar />
 
         {/* dash */}
         <main className="flex p-6">
@@ -145,9 +136,8 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          </div>
         </main>
-        </div>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SideBar from "./SideBar.js";
 
 const GoalSettings = ({ isOpen, onClose, goal }) => {
   if (!isOpen) {
