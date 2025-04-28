@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 
+
 // Import the UserProvider
 import { UserProvider } from './context/UserContext';
 
