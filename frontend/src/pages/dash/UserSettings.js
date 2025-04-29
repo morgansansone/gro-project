@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../../context/UserContext'; // Adjust path as needed
 
 export default function UserSettings() {
+  // Get user data from context
+  const { user } = useContext(UserContext);
     
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('xxxxx@gmail.com'); // Initial value from the image
+  // Initialize state with user data from context or default values
+  const [name, setName] = useState(user?.displayname || '');
+  const [email, setEmail] = useState(user?.email || 'xxxxx@gmail.com');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [routingNumber, setRoutingNumber] = useState('');
   const [bankAccountNumber, setBankAccountNumber] = useState('');
+
+  // Get password from user context or use default
+  const password = user?.password || '**********';
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -69,7 +76,7 @@ export default function UserSettings() {
                 type={passwordVisible ? 'text' : 'password'}
                 id="password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
-                value="**********" // Placeholder for the masked password
+                value={password} // Now using actual password from user context
                 readOnly
               />
               <button
@@ -106,32 +113,6 @@ export default function UserSettings() {
               Change Password
             </button>
           </div>
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="routingNumber" className="block text-gray-700 text-sm font-bold mb-2">
-            Routing #:
-          </label>
-          <input
-            type="text"
-            id="routingNumber"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={routingNumber}
-            onChange={(e) => setRoutingNumber(e.target.value)}
-          />
-        </div>
-
-        <div className="mb-6">
-          <label htmlFor="bankAccountNumber" className="block text-gray-700 text-sm font-bold mb-2">
-            Bank Account #:
-          </label>
-          <input
-            type="text"
-            id="bankAccountNumber"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={bankAccountNumber}
-            onChange={(e) => setBankAccountNumber(e.target.value)}
-          />
         </div>
 
         <div className="flex justify-end">

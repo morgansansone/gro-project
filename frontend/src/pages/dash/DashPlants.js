@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import NavLogin from "../account/NavLogin.js";
+import { UserContext } from "../../context/UserContext"; // Adjust path as needed
 
 function DashPlants() {
-  const activeGoals = [
+  // Get user data from context
+  const { user } = useContext(UserContext);
+  
+  // Default goals if no user data
+  const defaultActiveGoals = [
     { id: 1, name: "Emergency Fund", progress: 65, target: 5000 },
     { id: 2, name: "Vacation to Bali", progress: 30, target: 3000 },
+    { id: 3, name: "Third Test", progress: 75, target: 5000 },
   ];
+
+  // Transform plants from user context to activeGoals format
+  const activeGoals = user?.plants ? 
+    user.plants.map((plant, index) => ({
+      id: index + 1,
+      name: plant.goalName,
+      // Calculate progress percentage
+      progress: Math.round((plant.currentAmount / plant.targetAmount) * 100),
+      target: plant.targetAmount
+    })) : 
+    defaultActiveGoals;
 
   const completedGoals = [
     { id: 3, name: "New Laptop", progress: 100, target: 1200 },
