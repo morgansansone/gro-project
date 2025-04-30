@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
 import SideBar from "./dash/SideBar.js";
-import { useState } from "react";
 import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
 import { UserContext } from "../context/UserContext"; // Adjust path if needed

@@ -26,6 +26,68 @@ app.get('/api/db-test', async (req, res) => {
   }
 });
 
+// ── 4) Registration endpoint ──────────────────────────────────────────────
+app.post('/api/register', async (req, res) => {
+  console.log('🔐 Register attempt:', req.body);
+  const { displayname, email, password } = req.body;
+
+  if (!displayname || !email || !password) {
+    return res
+      .status(400)
+      .json({ success: false, message: 'Name, email & password are required' });
+  }
+
+  try {
+    // 1. Check if the email is already registered
+    const exists = await db.query(
+      `SELECT 1 FROM public."User" WHERE email = $1`,
+      [email]
+    );
+    if (exists.rows.length) {
+      return res
+        .status(409)
+        .json({ success: false, message: 'Email already registered' });
+    }
+
+    // 2. Find an available (unclaimed) accountid
+    const result = await db.query(`
+      SELECT accountid FROM public.account
+      WHERE accountid NOT IN (
+        SELECT accountid FROM public."User"
+      )
+      LIMIT 1
+    `);
+
+    if (!result.rows.length) {
+      return res
+        .status(500)
+        .json({ success: false, message: 'No available account IDs' });
+    }
+
+    const availableAccountId = result.rows[0].accountid;
+
+    // 3. Insert the new user with that accountid
+    await db.query(
+      `INSERT INTO public."User"
+        (displayname, email, password,
+         securityq1, q1a,
+         securityq2, q2a,
+         accountid, allocatedfunds)
+       VALUES
+        ($1, $2, $3,
+         'Blank Q1', 'A1',
+         'Blank Q2', 'Q2',
+         $4, $5)`,
+      [displayname, email, password, availableAccountId, 0]
+    );
+
+    res.json({ success: true, message: 'Account created successfully' });
+  } catch (err) {
+    console.error('Register error:', err);
+    res.status(500).json({ success: false, message: 'Server error during registration' });
+  }
+});
+
 // Login endpoint with database authentication
 app.post('/api/login', async (req, res) => {
   try {
