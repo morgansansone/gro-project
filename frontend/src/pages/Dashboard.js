@@ -69,9 +69,9 @@ export default function Dashboard() {
   
   // Default goals as fallback if user data isn't available
   const defaultGoals = [
-    { goalName: "Goal 1", plantType: "Rose", currentAmount: 0, targetAmount: 500 },
-    { goalName: "Buy Soil", plantType: "Sunflower", currentAmount: 0, targetAmount: 300 },
-    { goalName: "Water System", plantType: "Cactus", currentAmount: 0, targetAmount: 200 }
+    { goalName: "Empty Goal", plantType: "Rose", currentAmount: 0, targetAmount: 1 },
+    { goalName: "Empty Goal", plantType: "Sunflower", currentAmount: 0, targetAmount: 1 },
+    { goalName: "Empty Goal", plantType: "Cactus", currentAmount: 0, targetAmount: 1 }
   ];
   
   // Use user's plants or default goals if not available

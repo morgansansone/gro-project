@@ -9,9 +9,9 @@ function DashPlants() {
   
   // Default goals if no user data
   const defaultActiveGoals = [
-    { id: 1, name: "Emergency Fund", progress: 65, target: 5000 },
-    { id: 2, name: "Vacation to Bali", progress: 30, target: 3000 },
-    { id: 3, name: "Third Test", progress: 75, target: 5000 },
+    { id: 1, name: "Empty Goal", progress: 0, target: 1 },
+    { id: 2, name: "Empty Goal", progress: 0, target: 1 },
+    { id: 3, name: "Empty Goal", progress: 0, target: 1 },
   ];
 
   // Transform plants from user context to activeGoals format
