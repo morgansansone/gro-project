@@ -1,19 +1,18 @@
-
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
 import SideBar from "./dash/SideBar.js";
-import { useState } from "react";
 import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
+import { UserContext } from "../context/UserContext"; // Adjust path if needed
 
-const Goal = ({ name, goalAmount, type, priority, onClick }) => {
-  let currentAmount = 0;
+const Goal = ({ name, goalAmount, currentAmount = 0, type, onClick }) => {
+  // Modified to accept currentAmount as a prop with default value
   if (currentAmount > goalAmount) currentAmount = goalAmount;
   let percent = 0;
-  if (currentAmount > 0 && goalAmount > 0) percent = (currentAmount / goalAmount) * 100;
+  if (currentAmount > 0) percent = currentAmount / goalAmount * 100;
   let imageSrc = getGoalImage(type, percent);
-
   return (
     <div
       onClick={onClick}
@@ -30,25 +29,30 @@ const Goal = ({ name, goalAmount, type, priority, onClick }) => {
 };
 
 const getGoalImage = (type, percent) => {
-  if (type === "R") {
-    if (percent >= 60) return "/goals/R3.png";
-    if (percent >= 30) return "/goals/R2.png";
-    return "/goals/R1.png";
-  } else if (type === "S") {
-    if (percent >= 60) return "/goals/S3.png";
-    if (percent >= 30) return "/goals/S2.png";
-    return "/goals/S1.png";
-  } else if (type === "C") {
-    if (percent >= 60) return "/goals/C3.png";
-    if (percent >= 30) return "/goals/C2.png";
-    return "/goals/C1.png";
-  }
-  return "/goals/R1.png"; // default
+  let image = "";
+  if (type == "Rose")
+    if (percent >= 60) image = "/goals/R3.png";
+    else if (percent >= 30) image = "/goals/R2.png";
+    else image = "/goals/R1.png";
+  else if (type == "Sunflower")
+    if (percent >= 60) image = "/goals/S3.png";
+    else if (percent >= 30) image = "/goals/S2.png";
+    else image = "/goals/S1.png";
+  else if (type == "Cactus")
+    if (percent >= 60) image = "/goals/C3.png";
+    else if (percent >= 30) image = "/goals/C2.png";
+    else image = "/goals/C1.png";  
+  else image = "/goals/R1.png";
+  return image; 
 };
 
 export default function Dashboard() {
-  let savings_amount = 1000; // example saving amount, connect with data
-
+  // Get user data from context
+  const { user } = useContext(UserContext);
+  
+  // Use user's allocated funds with fallback
+  let savings_amount = user?.allocatedfunds ?? 1000;
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isGoalSettingsOpen, setIsGoalSettingsOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
@@ -74,11 +78,17 @@ export default function Dashboard() {
     setIsGoalSettingsOpen(true);
   };
 
-  const [goals, setGoals] = useState([
-    { name: "Fart", goalAmount: 500, type: "R" },
-    { name: "College Savings", goalAmount: 300, type: "S" },
-    { name: "Emergency Fund", goalAmount: 200, type: "C" }
-  ]);
+
+  
+  // Default goals as fallback if user data isn't available
+  const defaultGoals = [
+    { goalName: "Empty Goal", plantType: "Rose", currentAmount: 0, targetAmount: 1 },
+    { goalName: "Empty Goal", plantType: "Sunflower", currentAmount: 0, targetAmount: 1 },
+    { goalName: "Empty Goal", plantType: "Cactus", currentAmount: 0, targetAmount: 1 }
+  ];
+  
+  // Use user's plants or default goals if not available
+  const goals = user?.plants || defaultGoals;
   
   return (
     <div className="min-h-screen bg-[#FBFCF7] flex flex-col">
@@ -115,13 +125,14 @@ export default function Dashboard() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-              {goals.map((goal, index) => (
-                <Goal
-                  key={index}
-                  name={goal.name}
-                  goalAmount={goal.goalAmount}
-                  type={goal.type}
-                  onClick={() => handleGoalClick(goal)} // ✅ Use the real goal
+                {goals.map((goal, index) => (
+                  <Goal 
+                    key={index}
+                    name={goal.goalName}
+                    goalAmount={goal.targetAmount}
+                    currentAmount={goal.currentAmount}
+                    type={goal.plantType}
+                    onClick={() => handleGoalClick(goal.goalName)}
                   />
                 ))}
               </div>

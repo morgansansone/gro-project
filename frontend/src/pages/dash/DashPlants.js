@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import NavLogin from "../account/NavLogin.js";
 import SideBar from './SideBar.js';
+import { UserContext } from "../../context/UserContext"; // Adjust path as needed
 
 function DashPlants() {
-  const activeGoals = [
-    { id: 1, name: "Emergency Fund", progress: 65, target: 5000 },
-    { id: 2, name: "Vacation to Bali", progress: 30, target: 3000 },
+  // Get user data from context
+  const { user } = useContext(UserContext);
+  
+  // Default goals if no user data
+  const defaultActiveGoals = [
+    { id: 1, name: "Empty Goal", progress: 0, target: 1 },
+    { id: 2, name: "Empty Goal", progress: 0, target: 1 },
+    { id: 3, name: "Empty Goal", progress: 0, target: 1 },
   ];
+
+  // Transform plants from user context to activeGoals format
+  const activeGoals = user?.plants ? 
+    user.plants.map((plant, index) => ({
+      id: index + 1,
+      name: plant.goalName,
+      // Calculate progress percentage
+      progress: Math.round((plant.currentAmount / plant.targetAmount) * 100),
+      target: plant.targetAmount
+    })) : 
+    defaultActiveGoals;
 
   const completedGoals = [
     { id: 3, name: "New Laptop", progress: 100, target: 1200 },
