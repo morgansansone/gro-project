@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
+import SideBar from "./dash/SideBar.js";
+import { useState } from "react";
 import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
 import { UserContext } from "../context/UserContext"; // Adjust path if needed
@@ -53,6 +55,13 @@ export default function Dashboard() {
   let savings_amount = user?.allocatedfunds ?? 1000;
   
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGoalSettingsOpen, setIsGoalSettingsOpen] = useState(false);
+  const [selectedGoal, setSelectedGoal] = useState(null);
+
+  const handleGoalClick = (goal) => {
+    setSelectedGoal(goal);
+    setIsGoalSettingsOpen(true);
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -61,11 +70,16 @@ export default function Dashboard() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  
-  const handleGoalClick = (goalName) => {
-    console.log("Goal clicked:", goalName);
-    // Placeholder: implement navigation or modal here
+
+  const closeGoalSettings = () => {
+    setIsGoalSettingsOpen(false);
   };
+
+  const openGoalSettings = () => {
+    setIsGoalSettingsOpen(true);
+  };
+
+
   
   // Default goals as fallback if user data isn't available
   const defaultGoals = [
@@ -78,28 +92,14 @@ export default function Dashboard() {
   const goals = user?.plants || defaultGoals;
   
   return (
-    <div className="h-screen bg-[#f8faf3]">      
-        {/* Topbar */}      
+    <div className="min-h-screen bg-[#FBFCF7] flex flex-col">
+      {/* Navbar */}
       <NavLogin />
 
-      <div className="flex">
+      {/* Sidebar + Content */}
+      <div className="flex flex-1">
         {/* Sidebar */}
-        <aside className="w-36 bg-[#e0edd9] p-4 space-y-4 h-48 rounded-xl float-left">
-          <nav className="space-y-3">
-            <Link to="/goal-create" className="block text-gray-700 hover:text-green-600">
-              New Goal
-            </Link>
-            <Link to="/dashboard-plants" className="block text-gray-700 hover:text-green-600">
-              Plants
-            </Link>
-            <Link to="/bank-settings" className="block text-gray-700 hover:text-green-600">
-              Bank Settings
-            </Link>
-            <Link to="/learn-more" className="block text-gray-700 hover:text-green-600">
-              Learn More
-            </Link>
-          </nav>
-        </aside>
+        <SideBar />
 
         {/* dash */}
         <main className="flex p-6">
@@ -114,7 +114,7 @@ export default function Dashboard() {
               <div className="flex justify-between items-center mb-4">
                 <button
                   onClick={openModal}
-                  className="bg-green-500 text-white px-4 py-2 rounded-lg max-w-40 max-h-20 text-m font-semibold"
+                  className="bg-[#5DB151] text-white px-4 py-2 rounded-lg max-w-40 max-h-20 text-m"
                 >
                   Allocate Funds
                 </button>
@@ -139,9 +139,16 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          </div>
-        </main>
         </div>
+      </main>
     </div>
-  );
+
+    {/* Goal Settings Modal */}
+    <GoalSettings
+      isOpen={isGoalSettingsOpen}
+      onClose={closeGoalSettings}
+      goal={selectedGoal}
+    />
+  </div>
+);
 }

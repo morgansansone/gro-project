@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import SideBar from "./SideBar.js";
 import { UserContext } from '../../context/UserContext'; // Adjust path as needed
 
 export default function UserSettings() {
