@@ -60,7 +60,7 @@ function Plants() {
 
       <div className="max-w-6xl mx-auto p-6">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-[#2a5c3a] mb-4">Watch Your Money Grow</h1>
+          <h1 className="text-4xl font-bold text-[#2a5c3a] mb-4">Watch Your Money Gro</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Gro turns financial goals into a beautiful garden. See your progress grow like plants!
           </p>
