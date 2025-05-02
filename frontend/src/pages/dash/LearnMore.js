@@ -123,7 +123,7 @@ export default function LearnMore() {
 
             <h2 className="text-2xl font-bold text-green-700 mt-10 mb-4">Educational Resources</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              Explore tutorials, app walkthroughs, and personal finance tips to maximize your Gro experience.
+              Explore personal finance tips, a budgeting quiz, emergency fund calculator, a pdf goal planning worksheet, and a bunch of articles to maximize your Gro experience.
             </p>
 
             <div className="space-y-4">
@@ -184,7 +184,7 @@ export default function LearnMore() {
                 </Modal>
               </ResourceItem>
 
-              <ResourceItem title="Goal-Based Saving" icon="🎯">
+              <ResourceItem title="Goal-Based Saving">
                 <p className="mb-3">
                   <strong>Setting and Achieving Financial Goals:</strong> Define clear, attainable goals to stay motivated and track progress.
                 </p>
