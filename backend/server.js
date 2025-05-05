@@ -149,6 +149,54 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Create Goal Endpoint
+app.post('/api/create-goal', async (req, res) => {
+  try {
+    const { email, goalName, targetAmount, plantType } = req.body;
+
+    // Validate input
+    if (!email || !goalName || !targetAmount || !plantType) {
+      return res.status(400).json({
+        success: false,
+        message: 'All fields are required'
+      });
+    }
+
+    // Check existing goals count
+    const goalsCount = await db.query(
+      'SELECT COUNT(*) FROM public."goal" WHERE email = $1',
+      [email]
+    );
+    
+    if (parseInt(goalsCount.rows[0].count) >= 3) {
+      return res.status(400).json({
+        success: false,
+        message: 'Maximum of 3 goals allowed'
+      });
+    }
+
+    // Insert new goal
+    await db.query(
+      `INSERT INTO public."goal" 
+        (email, goalname, plant, target, current)
+       VALUES ($1, $2, $3, $4, $5)`,
+      [email, goalName, plantType, targetAmount, 0]
+    );
+
+    res.json({
+      success: true,
+      message: 'Goal created successfully'
+    });
+
+  } catch (err) {
+    console.error('Goal creation error:', err);
+    res.status(500).json({
+      success: false,
+      message: 'Server error during goal creation'
+    });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
