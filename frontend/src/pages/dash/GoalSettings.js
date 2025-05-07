@@ -1,14 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SideBar from "./SideBar.js";
 
 const GoalSettings = ({ isOpen, onClose, goal }) => {
-  if (!isOpen) {
+  if (!isOpen || !goal) {
     return null;
   }
 
   const { name, goalAmount, type, amountSaved = 0 } = goal;
   const percentSaved = ((amountSaved / goalAmount) * 100).toFixed(0) || 0;
 
+  // Get goal image based on type and progress
+  const getGoalImage = (type, percent) => {
+    let image = "";
+    if (type === "Rose")
+      if (percent >= 60) image = "/goals/R3.png";
+      else if (percent >= 30) image = "/goals/R2.png";
+      else image = "/goals/R1.png";
+    else if (type === "Sunflower")
+      if (percent >= 60) image = "/goals/S3.png";
+      else if (percent >= 30) image = "/goals/S2.png";
+      else image = "/goals/S1.png";
+    else if (type === "Cactus")
+      if (percent >= 60) image = "/goals/C3.png";
+      else if (percent >= 30) image = "/goals/C2.png";
+      else image = "/goals/C1.png";
+    else image = "/goals/R1.png";
+    return image;
+  };
+
+  const imageSrc = getGoalImage(type, percentSaved);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-200 bg-opacity-80 flex justify-center items-center z-50">
@@ -39,9 +59,21 @@ const GoalSettings = ({ isOpen, onClose, goal }) => {
           <span className="text-gray-700">$ {goalAmount}</span>
         </div>
 
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-2">
           <label className="text-gray-700 text-sm font-semibold">Amount Saved:</label>
           <span className="text-gray-700">$ {amountSaved}</span>
+        </div>
+
+        <div className="flex items-center justify-between mb-2">
+          <label className="text-gray-700 text-sm font-semibold">Progress:</label>
+          <span className="text-gray-700">{percentSaved}%</span>
+        </div>
+
+        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+          <div
+            className="bg-green-600 h-2.5 rounded-full"
+            style={{ width: `${percentSaved}%` }}
+          ></div>
         </div>
 
         <div className="flex items-center justify-between mb-4">
@@ -49,13 +81,12 @@ const GoalSettings = ({ isOpen, onClose, goal }) => {
           <span className="text-red-500 text-xl font-bold">!</span>
         </div>
 
-        <button className="bg-[#5DB151] hover:bg-[#4a8c41] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4">
-          Add Funds
-        </button>
-
         <div className="flex justify-center">
-          <div className="relative w-20 h-20 bg-brown-300 rounded-sm flex items-end justify-center overflow-hidden">
-                      </div>
+          <img
+            src={imageSrc}
+            alt={`${type} goal phase`}
+            className="w-20 h-20 object-contain"
+          />
         </div>
       </div>
     </div>

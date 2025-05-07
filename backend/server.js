@@ -149,6 +149,81 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Create Goal Endpoint
+app.post('/api/create-goal', async (req, res) => {
+  try {
+    const { email, goalName, targetAmount, plantType } = req.body;
+
+    // Validate input
+    if (!email || !goalName || !targetAmount || !plantType) {
+      return res.status(400).json({
+        success: false,
+        message: 'All fields are required'
+      });
+    }
+
+    // Check existing goals count
+    const goalsCount = await db.query(
+      'SELECT COUNT(*) FROM public."goal" WHERE email = $1',
+      [email]
+    );
+    
+    if (parseInt(goalsCount.rows[0].count) >= 3) {
+      return res.status(400).json({
+        success: false,
+        message: 'Maximum of 3 goals allowed'
+      });
+    }
+
+    // Insert new goal
+    await db.query(
+      `INSERT INTO public."goal" 
+        (email, goalname, plant, target, current)
+       VALUES ($1, $2, $3, $4, $5)`,
+      [email, goalName, plantType, targetAmount, 0]
+    );
+
+    res.json({
+      success: true,
+      message: 'Goal created successfully'
+    });
+
+  } catch (err) {
+    console.error('Goal creation error:', err);
+    res.status(500).json({
+      success: false,
+      message: 'Server error during goal creation'
+    });
+  }
+});
+
+//Update goal endpoint
+app.post('/api/update-goals', async (req, res) => {
+  try {
+    const { email, plants } = req.body;
+    
+    // Update all goals in a transaction
+    await db.query('BEGIN');
+    
+    for (const plant of plants) {
+      await db.query(
+        `UPDATE public."goal" 
+         SET current = $1
+         WHERE email = $2 AND goalname = $3`,
+        [plant.currentAmount, email, plant.goalName]
+      );
+    }
+    
+    await db.query('COMMIT');
+    
+    res.json({ success: true });
+  } catch (err) {
+    await db.query('ROLLBACK');
+    console.error('Goal update error:', err);
+    res.status(500).json({ success: false, message: 'Failed to update goals' });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -1,14 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import NavLogin from "./account/NavLogin.js";
 import Modal from "./dash/Allocate.js";
 import SideBar from "./dash/SideBar.js";
-import UserSettings from "./dash/UserSettings.js";
 import GoalSettings from "./dash/GoalSettings.js";
-import { UserContext } from "../context/UserContext"; // Adjust path if needed
+import { UserContext } from "../context/UserContext";
 
 const Goal = ({ name, goalAmount, currentAmount = 0, type, onClick }) => {
-  // Modified to accept currentAmount as a prop with default value
   if (currentAmount > goalAmount) currentAmount = goalAmount;
   let percent = 0;
   if (currentAmount > 0) percent = currentAmount / goalAmount * 100;
@@ -47,107 +45,95 @@ const getGoalImage = (type, percent) => {
 };
 
 export default function Dashboard() {
-  // Get user data from context
   const { user } = useContext(UserContext);
-  
-  // Use user's allocated funds with fallback
-  let savings_amount = user?.allocatedfunds ?? 1000;
-  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isGoalSettingsOpen, setIsGoalSettingsOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
+
+  const savings_amount = user?.allocatedfunds ?? 1000;
+  const defaultGoals = [
+    { goalName: "Empty Goal", plantType: "Rose", currentAmount: 0, targetAmount: 1 },
+    { goalName: "Empty Goal", plantType: "Sunflower", currentAmount: 0, targetAmount: 1 },
+    { goalName: "Empty Goal", plantType: "Cactus", currentAmount: 0, targetAmount: 1 }
+  ];
+  const goals = user?.plants || defaultGoals;
 
   const handleGoalClick = (goal) => {
     setSelectedGoal(goal);
     setIsGoalSettingsOpen(true);
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   const closeGoalSettings = () => {
     setIsGoalSettingsOpen(false);
+    setSelectedGoal(null);
   };
 
-  const openGoalSettings = () => {
-    setIsGoalSettingsOpen(true);
-  };
-
-
-  
-  // Default goals as fallback if user data isn't available
-  const defaultGoals = [
-    { goalName: "Empty Goal", plantType: "Rose", currentAmount: 0, targetAmount: 1 },
-    { goalName: "Empty Goal", plantType: "Sunflower", currentAmount: 0, targetAmount: 1 },
-    { goalName: "Empty Goal", plantType: "Cactus", currentAmount: 0, targetAmount: 1 }
-  ];
-  
-  // Use user's plants or default goals if not available
-  const goals = user?.plants || defaultGoals;
-  
   return (
     <div className="min-h-screen bg-[#FBFCF7] flex flex-col">
-      {/* Navbar */}
       <NavLogin />
 
-      {/* Sidebar + Content */}
       <div className="flex flex-1">
-        {/* Sidebar */}
         <SideBar />
 
-        {/* dash */}
         <main className="flex p-6">
           <div className="w-[950px]">
-          <div className="flex justify-between items-baseline w-full mb-2">
-              <div className="text-3xl  text-[#274A21] float-left m-10">Total Savings: ${savings_amount}</div>
-              <Link to='/goal-create'><a href='#' className="text-lg float-right text-gray-500 underline">+ Create New Goal</a></Link>
-          </div>
-        {/* Goals Section */}
-          <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg shadow-md flex justify-between overflow-x-scroll">
-            <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg">
-              <div className="flex justify-between items-center mb-4">
-                <button
-                  onClick={openModal}
-                  className="bg-[#5DB151] text-white px-4 py-2 rounded-lg max-w-40 max-h-20 text-m"
-                >
-                  Allocate Funds
-                </button>
-
-                <Modal isOpen={isModalOpen} onClose={closeModal}>
-                  <h2>Modal Title</h2>
-                  <p>This is the content of the modal.</p>
-                </Modal>
+            <div className="flex justify-between items-baseline w-full mb-2">
+              <div className="text-3xl text-[#274A21] float-left m-10">
+                Total Savings: ${savings_amount}
               </div>
+              <Link to='/goal-create'>
+                <a href='#' className="text-lg float-right text-gray-500 underline">
+                  + Create New Goal
+                </a>
+              </Link>
+            </div>
 
-              <div className="flex flex-wrap gap-4">
-                {goals.map((goal, index) => (
-                  <Goal 
-                    key={index}
-                    name={goal.goalName}
-                    goalAmount={goal.targetAmount}
-                    currentAmount={goal.currentAmount}
-                    type={goal.plantType}
-                    onClick={() => handleGoalClick(goal.goalName)}
-                  />
-                ))}
+            <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg shadow-md flex justify-between overflow-x-scroll">
+              <div className="bg-[#f5f7e9] p-6 w-auto rounded-lg">
+                <div className="flex justify-between items-center mb-4">
+                  <button
+                    onClick={openModal}
+                    className="bg-[#5DB151] text-white px-4 py-2 rounded-lg max-w-40 max-h-20 text-m"
+                  >
+                    Allocate Funds
+                  </button>
+
+                  <Modal isOpen={isModalOpen} onClose={closeModal}>
+                    <h2>Modal Title</h2>
+                    <p>This is the content of the modal.</p>
+                  </Modal>
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  {goals.map((goal, index) => (
+                    <Goal 
+                      key={index}
+                      name={goal.goalName}
+                      goalAmount={goal.targetAmount}
+                      currentAmount={goal.currentAmount}
+                      type={goal.plantType}
+                      onClick={() => handleGoalClick(goal)}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
 
-    {/* Goal Settings Modal */}
-    <GoalSettings
-      isOpen={isGoalSettingsOpen}
-      onClose={closeGoalSettings}
-      goal={selectedGoal}
-    />
-  </div>
-);
+      <GoalSettings
+        isOpen={isGoalSettingsOpen}
+        onClose={closeGoalSettings}
+        goal={selectedGoal ? {
+          name: selectedGoal.goalName,
+          goalAmount: selectedGoal.targetAmount,
+          type: selectedGoal.plantType,
+          amountSaved: selectedGoal.currentAmount
+        } : null}
+      />
+    </div>
+  );
 }
