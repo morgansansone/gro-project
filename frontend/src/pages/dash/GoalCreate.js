@@ -74,13 +74,14 @@ export default function GoalCreate() {
         goalName: formData.goalName,
         plantType: formData.plantType,
         currentAmount: 0,
-        targetAmount: formData.targetAmount
+        targetAmount: Number(formData.targetAmount)  // Convert to number
       };
 
       setUser(prev => ({
         ...prev,
         plants: [...prev.plants, newGoal]
       }));
+
 
       navigate('/dashboard');
 
