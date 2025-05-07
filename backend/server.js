@@ -197,6 +197,33 @@ app.post('/api/create-goal', async (req, res) => {
   }
 });
 
+//Update goal endpoint
+app.post('/api/update-goals', async (req, res) => {
+  try {
+    const { email, plants } = req.body;
+    
+    // Update all goals in a transaction
+    await db.query('BEGIN');
+    
+    for (const plant of plants) {
+      await db.query(
+        `UPDATE public."goal" 
+         SET current = $1
+         WHERE email = $2 AND goalname = $3`,
+        [plant.currentAmount, email, plant.goalName]
+      );
+    }
+    
+    await db.query('COMMIT');
+    
+    res.json({ success: true });
+  } catch (err) {
+    await db.query('ROLLBACK');
+    console.error('Goal update error:', err);
+    res.status(500).json({ success: false, message: 'Failed to update goals' });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

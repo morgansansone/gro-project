@@ -81,10 +81,6 @@ const GoalSettings = ({ isOpen, onClose, goal }) => {
           <span className="text-red-500 text-xl font-bold">!</span>
         </div>
 
-        <button className="bg-[#5DB151] hover:bg-[#4a8c41] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4">
-          Add Funds
-        </button>
-
         <div className="flex justify-center">
           <img
             src={imageSrc}
