@@ -7,7 +7,7 @@ function About() {
     {
       name: "Grady Bice",
       role: "Backend Engineer & Database Architect",
-      image: "/team/grady.jpg",
+      image: "/team/grady.png",
       bio: "Designed the backend architecture and structured the database. Connected the database to the frontend for login and goal display, ensuring a seamless flow of data throughout the app."
     },
     {
@@ -25,7 +25,7 @@ function About() {
     {
       name: "Morgan Sansone",
       role: "Project Manager, Frontend Developer & Visual Designer",
-      image: "/team/morgan.JPG",
+      image: "/team/morgan.jpg",
       bio: "Set up the project repository, created the logo and visual design system, and built the home, login, create account, and informational pages. Designed layouts in Canva and co-led planning using Confluence with Isa."
     }
   ];
