@@ -93,16 +93,15 @@ function Features() {
           <section className="mb-16">
             <h3 className="text-2xl font-bold text-[#2a5c3a] mb-6">Core Features</h3>
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {features.map((feature, idx) => (
-                <div
-                  key={idx}
-                  className="bg-[#eef3e1] rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow"
-                >
-                  <img src={feature.image} alt={feature.title} className="w-full h-40 object-contain mb-4" />
-                  <h3 className="text-lg font-semibold text-green-800 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
-                </div>
-              ))}
+            {features.map((feature, idx) => (
+              <div
+                key={idx}
+                className="bg-[#eef3e1] rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow"
+              >
+                <h3 className="text-lg font-semibold text-green-800 mb-2">{feature.title}</h3>
+                <p className="text-gray-600 text-sm">{feature.description}</p>
+              </div>
+            ))}
             </div>
           </section>
 
